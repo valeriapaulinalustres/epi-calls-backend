@@ -19,6 +19,10 @@ app.get('/', (req,res)=>{
   res.json({mensaje: 'Funcionando backend de EPIcalls'})
 })
 
+app.get('/api/prueba', (req,res)=>{
+  res.json({mensaje: '1234'})
+})
+
 app.use("/api/users", usersRouter);
 app.use("/api/projects", projectsRouter)
 app.use("/api/sheets", sheetsRouter)
