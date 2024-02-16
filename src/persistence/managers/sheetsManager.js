@@ -51,15 +51,16 @@ const db = [
 
 function divideArray(array, num, collaborators) {
   const newArraysLength = Math.ceil(array.length / num);
-  console.log(newArraysLength);
+  console.log('newArraysLength',newArraysLength);
   const newSheets = [];
   for (let i = 0; i < num; i++) {
     const copy = [...array];
     newSheets.push({
-      createdAt: new Date(),
+      updatedAt: new Date(),
       collaborator: collaborators[i].user,
-      sheet: copy.splice(i * newArraysLength, newArraysLength),
+      excel: copy.splice(i * newArraysLength, newArraysLength),
     });
+    console.log('newSheets', newSheets)
   }
   return newSheets;
 }
@@ -115,20 +116,25 @@ console.log('db sin duplicados', dbWithoutDuplicates)
 
 console.log('se in project',  projectFromDb[0].patientsFilter.searchFromInWeeks)
 
-      //Filter by SE in excel
-      const dbFilteredBySE = [];
-      for (let i = 0; i < dbWithoutDuplicates.length; i++) {
-        if (dbWithoutDuplicates[i].SE_APERTURA == '*sin dato*') {
-          dbFilteredBySE.push(dbWithoutDuplicates[i]);
+async function filterBySE () {
+        //Filter by SE in excel
+        const dbFilteredBySE = [];
+        for (let i = 0; i < dbWithoutDuplicates.length; i++) {
+          if (dbWithoutDuplicates[i].SE_APERTURA == '*sin dato*') {
+            dbFilteredBySE.push(dbWithoutDuplicates[i]);
+          }
+       else if (
+            dbWithoutDuplicates[i].SE_apertura >=
+            (numeroDeSemanaActual -
+              projectFromDb[0].patientsFilter.searchFromInWeeks)
+          ) {
+            dbFilteredBySE.push(dbWithoutDuplicates[i]);
+          }
         }
-     else if (
-          dbWithoutDuplicates[i].SE_APERTURA >=
-          (numeroDeSemanaActual -
-            projectFromDb[0].patientsFilter.searchFromInWeeks)
-        ) {
-          dbFilteredBySE.push(dbWithoutDuplicates[i]);
-        }
+return dbFilteredBySE
       }
+      const dbFilteredBySE = await filterBySE()
+      console.log('filtered', dbFilteredBySE)
 
       console.log('se', numeroDeSemanaActual)
 
@@ -140,7 +146,7 @@ console.log('se in project',  projectFromDb[0].patientsFilter.searchFromInWeeks)
         if (projectFromDb[0].disease === 'Dengue') {
           console.log('entra0')
           if (
-            projectFromDb[0].patientsFilter.diagnosis[0].includes('Caso confirmado')
+            projectFromDb[0].patientsFilter.diagnosis[0].includes('confirmados')
           ) {
             console.log('entra acá if')
             if (
@@ -160,7 +166,7 @@ console.log('se in project',  projectFromDb[0].patientsFilter.searchFromInWeeks)
             }
           }
           else if (
-            projectFromDb[0].patientsFilter.diagnosis[0].includes('Caso sospechoso')
+            projectFromDb[0].patientsFilter.diagnosis[0].includes('sospechosos')
           ) {
             console.log('entra3')
             if (
@@ -222,24 +228,24 @@ console.log('dbFilteredWithMongo', dbFilteredWithMongo)
       }
 
       console.log('newsheets', newSheets);
-/*
-      let allSheets = [];
 
-      for (let i = 0; i < newSheets.length; i++) {
-        const aux = {
-          sheet: newSheets[i],
-          collaborator: projectFromDb.collaborators[i],
-        };
-        allSheets.push(aux);
-      }
-      const finalNewSheets = {
-        excel: [...allSheets],
-        updatedAt: new Date(),
-        updatedBy: excelAndProject.userId,
-      };
+      // let allSheets = [];
 
-      console.log('finalnewsheet', finalNewSheets);
-*/
+      // for (let i = 0; i < newSheets.length; i++) {
+      //   const aux = {
+      //     sheet: newSheets[i],
+      //     collaborator: projectFromDb.collaborators[i],
+      //   };
+      //   allSheets.push(aux);
+      // }
+      // const finalNewSheets = {
+      //   excel: [...allSheets],
+      //   updatedAt: new Date(),
+      //   updatedBy: excelAndProject.userId,
+      // };
+
+      // console.log('finalnewsheet', finalNewSheets);
+
          await sheetModel.findByIdAndDelete(db._id);
         const newSheetsFromDb = await sheetModel.create(newSheets);
 

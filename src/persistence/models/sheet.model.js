@@ -7,12 +7,12 @@ const sheetsSchema = new mongoose.Schema({
   },
   updatedAt: {
     type: String,
-    required: true,
+    required: false,
   },
   updatedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users',
-    required: true,
+    required: false,
   },
   collaborator: {
     type: mongoose.Schema.Types.ObjectId,
