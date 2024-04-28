@@ -224,7 +224,7 @@ console.log('dbFilteredWithMongo', dbFilteredWithMongo)
           projectFromDb[0].collaborators
         );
       } else {
-        newSheets = divideArray(result, projectFromDb[0].collaborators.length, projectFromDb[0].collaborators);
+        newSheets = divideArray(result, projectFromDb[0].collaborators.length, projectFromDb[0].collaborators, excelAndProject.projectId);
       }
 
       console.log('newsheets', newSheets);

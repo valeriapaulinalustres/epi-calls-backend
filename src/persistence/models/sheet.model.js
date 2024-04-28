@@ -19,6 +19,11 @@ const sheetsSchema = new mongoose.Schema({
     ref: 'Users',
     required: true,
   },
+  project: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Projects',
+    required: true,
+  }
 });
 
 export const sheetModel = mongoose.model('Sheets', sheetsSchema);
