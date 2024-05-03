@@ -1,0 +1,64 @@
+--- Sheets ---
+
+//Get Sheets
+GET: http://localhost:8081/api/sheets/getsheets
+
+    Parameters: no
+
+    Response:
+    {
+    "success": true,
+    "message": "Sheets got successfully",
+    "sheets": [
+        {
+            "_id": "65cf9784ef406f00a526a1b2",
+            "excel": [
+                {
+                    "APELLIDO": "AHRENS",
+                    "NOMBRE": "ELIZABETH ELENA",
+                    "DNI": 24449958,
+                    "EDAD": 48,
+                    "SEXO": "F",
+                    "CONTACTO": "01167102485; ; ",
+                    "SE_APERTURA": "*sin dato*",
+                    "CLASIFICACION_MANUAL": "Caso confirmado sin serotipo",
+                    "ESTABLECIMIENTO_CARGA": "HOSPITAL DISTRITAL INGENIERO JUAREZ EVA PERON",
+                    "CALLE": "San Nicolas",
+                    "NUMERO": 1786,
+                    "LOCALIDAD": "CASTELAR",
+                    "FIS": "*sin dato*",
+                    "FA": 45296
+                }
+            ],
+            "updatedAt": "Fri Feb 16 2024 14:12:36 GMT-0300 (hora estándar de Argentina)",
+            "collaborator": "652299d3bee37430ca7549cd",
+            "project": "652299d3bee37430ca754954",
+            "__v": 0
+        },
+    ]
+    }
+
+
+//Create new sheets (This endpoint is used when an admin uploads an excel file)
+POST: http://localhost:8081/api/sheets/createsheets
+
+    Parameters:
+    {excel: [],
+    userId: 87403718047
+    collaborators: ['cla@gmail.com'],
+    project: 73409817234,
+    }
+
+    Response:
+    
+
+//Update sheet (It is used when a collaborator phones a patient)
+put('/updatesheet');
+
+    Parameters:
+    {excel: [],
+    updatedAt: '',
+    updatedBy: _id,
+    collaborator: _id,
+    project: _id,
+    }

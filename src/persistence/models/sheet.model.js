@@ -17,7 +17,7 @@ const sheetsSchema = new mongoose.Schema({
   collaborator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users',
-    required: true,
+    required: false,
   },
   project: {
     type:mongoose.Schema.Types.ObjectId,
