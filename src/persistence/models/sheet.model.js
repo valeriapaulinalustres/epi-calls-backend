@@ -10,14 +10,12 @@ const sheetsSchema = new mongoose.Schema({
     required: false,
   },
   updatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String, //mail
     ref: 'Users',
     required: false,
   },
   collaborator: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Users',
-    required: false,
+    type: String,
   },
   project: {
     type:mongoose.Schema.Types.ObjectId,

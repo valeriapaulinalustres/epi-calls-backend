@@ -38,12 +38,71 @@ GET: http://localhost:8081/api/sheets/getsheets
     ]
     }
 
+//Get One sheet. This is used for collaborators to get their daily sheet
+POST: http://localhost:8081/api/sheets/getonesheet
+
+    Parameters:
+    {
+        mail: 'octa@gmail.com'
+    }
+
+    Response:
+    {
+    "success": true,
+    "message": "Sheet got successfully",
+    "sheets": [
+        {
+            "_id": "663e7cba35212c90ab9a7baa",
+            "excel": [
+                {
+                    "APELLIDO": "GOMEZ ANTUÑA",
+                    "NOMBRE": "LAUTARO GASTON",
+                    "DNI": 50398922,
+                    "EDAD": 13,
+                    "SEXO": "M",
+                    "CONTACTO": "1130555407; ; ",
+                    "SE_APERTURA": 19,
+                    "CLASIFICACION_MANUAL": "Caso confirmado DEN-2",
+                    "ESTABLECIMIENTO_CARGA": "HOSPITAL NACIONAL PROFESOR DR. ALEJANDRO POSADAS",
+                    "CALLE": "CABO AVIADOR ROTJER",
+                    "NUMERO": 818,
+                    "LOCALIDAD": "EL PALOMAR",
+                    "FIS": 45312,
+                    "FA": 45315
+                },
+                {
+                    "APELLIDO": "CERRUDO RADAELLI",
+                    "NOMBRE": "JONATHAN IVAN",
+                    "DNI": 31896017,
+                    "EDAD": 38,
+                    "SEXO": "M",
+                    "CONTACTO": "1161494086; ; ",
+                    "SE_APERTURA": 18,
+                    "CLASIFICACION_MANUAL": "Caso confirmado DEN-2",
+                    "ESTABLECIMIENTO_CARGA": "HOSPITAL NACIONAL PROFESOR DR. ALEJANDRO POSADAS",
+                    "CALLE": "VILLEGAS",
+                    "NUMERO": 353,
+                    "LOCALIDAD": "*SIN DATO* (*SIN DATO*)",
+                    "FIS": 45328,
+                    "FA": 45330
+                }
+            ],
+            "updatedAt": "Fri May 10 2024 16:59:54 GMT-0300 (hora estándar de Argentina)",
+            "updatedBy": "va@gmail.com",
+            "collaborator": "octa@gmail.com",
+            "project": "663e6a144b084bf447735519",
+            "__v": 0
+        }
+    ]
+}
+    
 
 //Create new sheets (This endpoint is used when an admin uploads an excel file)
 POST: http://localhost:8081/api/sheets/createsheets
 
     Parameters:
-    {excel: [],
+    {
+        excel: [],
     userId: 87403718047
     collaborators: ['cla@gmail.com'],
     project: 73409817234,

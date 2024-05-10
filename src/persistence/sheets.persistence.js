@@ -7,6 +7,10 @@ export async function getSheets (){
     return await persistence.getSheets()
 }
 
+export async function getOneSheet (mail){
+    return await persistence.getOneSheet(mail)
+}
+
 export async function createSheets (excelAndProject){
     return await persistence.createSheets(excelAndProject)
 }

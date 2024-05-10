@@ -33,7 +33,7 @@ const projectsSchema = new mongoose.Schema({
   collaborators: [
     {
       user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String, //mail
         ref: 'Users',
         required: true,
       },
@@ -46,7 +46,7 @@ const projectsSchema = new mongoose.Schema({
   collaboratorsToday: [
     {
       user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String, //mail
         ref: 'Users',
         required: true,
       },

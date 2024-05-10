@@ -19,6 +19,23 @@ export default class sheetsManager {
     }
   }
 
+  async getOneSheet(mail) { //recibes from front the mail of the collaborator who made the request
+    try {
+      console.log('mail', mail)
+      //Filter by user role, to get all sheets if your role is admin or only your sheet if you are a collaborator
+      const db = await sheetModel.find({collaborator: mail.mail});
+      
+      console.log("pasa por getSheets", db);
+      return {
+        success: true,
+        message: "Sheet got successfully",
+        sheets: db,
+      };
+    } catch (error) {
+      console.log("error del manager", error);
+    }
+  }
+
   async createSheets(excelAndProject) {
     //el front va a enviar {excel: [], projectId: "837483024", user: "dshfkasfdsa", collaborators}
 
@@ -44,8 +61,8 @@ export default class sheetsManager {
 
           const newSheetForBack = {
             updatedAt: new Date(),
-            collaborator: excelAndProject.collaborators[i]._id,
-            excel: copy.splice(i * newArraysLength, newArraysLength * (i + 1)),
+            collaborator: excelAndProject.collaborators[i].user,
+            excel: copy.slice(i * newArraysLength, newArraysLength * (i + 1)),
             project: excelAndProject.projectId,
             updatedBy: excelAndProject.user,
           };
@@ -93,8 +110,8 @@ export default class sheetsManager {
 
           const newSheetForBack = {
             updatedAt: new Date(),
-            collaborator: excelAndProject.collaborators[i]._id,
-            excel: copy.splice(i * newArraysLength, newArraysLength * (i + 1)),
+            collaborator: excelAndProject.collaborators[i].user,
+            excel: copy.slice(i * newArraysLength, newArraysLength * (i + 1)),
             project: excelAndProject.projectId,
             updatedBy: excelAndProject.user,
           };

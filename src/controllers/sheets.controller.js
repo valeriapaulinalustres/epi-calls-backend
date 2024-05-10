@@ -1,5 +1,6 @@
 import {
   getSheetsService,
+  getOneSheetService,
   createSheetsService,
   updateSheetService,
 } from '../services/sheets.service.js';
@@ -7,6 +8,15 @@ import {
 export const getSheetsController = async (req, res) => {
   try {
     const response = await getSheetsService();
+    res.json(response);
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const getOneSheetController = async (req, res) => {
+  try {
+    const response = await getOneSheetService(req.body);
     res.json(response);
   } catch (error) {
     console.log('error', error);

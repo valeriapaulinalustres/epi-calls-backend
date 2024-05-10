@@ -1,11 +1,17 @@
 import {
   getSheets,
+  getOneSheet,
   createSheets,
   updateSheet,
 } from '../persistence/sheets.persistence.js';
 
 export async function getSheetsService() {
   const response = await getSheets();
+  return response;
+}
+
+export async function getOneSheetService(mail) {
+  const response = await getOneSheet(mail);
   return response;
 }
 
